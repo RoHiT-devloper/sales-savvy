@@ -1,8 +1,6 @@
 // src/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Sign_in from "./pages/Sign_in";
-import Sign_up from "./pages/Sign_up";
 import Customer_home from "./customer_page/CustomerPage";
 import Welcome from "./pages/Welcome";
 import Add_Product from './productmanager/Add_Product';
