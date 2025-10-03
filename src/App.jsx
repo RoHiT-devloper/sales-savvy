@@ -1,6 +1,8 @@
 // src/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import Sign_in from "./pages/Sign_in";
+import Sign_up from "./pages/Sign_up";
 import Customer_home from "./customer_page/CustomerPage";
 import Welcome from "./pages/Welcome";
 import Add_Product from './productmanager/Add_Product';
@@ -10,12 +12,11 @@ import View_User from './user/View_User';
 import Show_All_Product from './productmanager/Show_All_Product';
 import Search_Product from './productmanager/Search_Product';
 import Product_Manager from './admin/Product_Manager';
-import Admin_home from "./admin/Admin_Home";
+import Admin_home from './admin/Admin_Home'; // This is the correct import
 import Delete_User from './user/Delete_User';
 import Header from './header/Header';
 import User_Management from './user/User_Management';
 import CartPage from './cart/CartPage';
-import AccessDenied from './pages/AccessDenied';
 import './app.css';
 import ForgotPassword from './forgotpassword/ForgotPassword';
 import AdminOrders from './pages/AdminOrders';
@@ -29,7 +30,7 @@ function App() {
   const location = useLocation();
   
   // Define paths where header should NOT be shown
-  const noHeaderPaths = ['/', '/signin', '/signup', '/access-denied', '/welcome'];
+  const noHeaderPaths = ['/', '/signin', '/signup', '/welcome'];
   const showHeader = !noHeaderPaths.includes(location.pathname);
 
   return (
@@ -42,17 +43,17 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<IndexPage />} />
           <Route path="/welcome" element={<Welcome />} />
-
-          <Route path="/access-denied" element={<AccessDenied />} />
+          <Route path="/signin" element={<Sign_in />} />
+          <Route path="/signup" element={<Sign_up />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
-          {/* Customer Routes - Now Public */}
+          {/* Customer Routes */}
           <Route path="/customer" element={<Customer_home />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/addresses" element={<AddressManager />} />
                     
-          {/* Admin Routes - Now Public */}
+          {/* Admin Routes */}
           <Route path="/admin" element={<Admin_home />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
