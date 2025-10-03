@@ -65,7 +65,7 @@ const IndexPage = () => {
         <h1>🏠 SalesSavvy - Project Index</h1>
         <p className="subtitle">Complete navigation guide for all application pages</p>
         <div className="project-info">
-          <p><strong>Built with:</strong> React.js, Spring Boot, PostgreSQL</p>
+          <p><strong>Built with:</strong> React.js, Spring Boot, MySQL</p>
           <p><strong>Features:</strong> E-commerce, User Management, Analytics, Payment Integration</p>
         </div>
       </div>
