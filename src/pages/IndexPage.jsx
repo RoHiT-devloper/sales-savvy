@@ -6,7 +6,7 @@ import './IndexPage.css';
 const IndexPage = () => {
   const pages = [
     // Public Pages
-    { path: '/', name: 'Welcome Page', description: 'Landing page for the application' },
+    { path: '/welcome', name: 'Welcome Page', description: 'Landing page for the application' },
     { path: '/signin', name: 'Sign In', description: 'User authentication page' },
     { path: '/signup', name: 'Sign Up', description: 'User registration page' },
     { path: '/forgot-password', name: 'Forgot Password', description: 'Password recovery page' },
