@@ -18,7 +18,7 @@ import User_Management from './user/User_Management';
 import CartPage from './cart/CartPage';
 import ProtectedRoute from './utils/ProtectedRoute';
 import AccessDenied from './pages/AccessDenied';
-import './App.css';
+import './app.css';
 import ForgotPassword from './forgotpassword/ForgotPassword';
 import AdminOrders from './pages/AdminOrders';
 import ProductReviews from './components/ProductReviews';
