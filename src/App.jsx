@@ -44,8 +44,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<IndexPage />} />
           <Route path="/welcome" element={<Welcome />} />
-          <Route path="/signin" element={<Sign_in />} />
-          <Route path="/signup" element={<Sign_up />} />
+
           <Route path="/access-denied" element={<AccessDenied />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
