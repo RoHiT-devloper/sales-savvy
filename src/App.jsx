@@ -17,6 +17,7 @@ import Delete_User from './user/Delete_User';
 import Header from './header/Header';
 import User_Management from './user/User_Management';
 import CartPage from './cart/CartPage';
+import DemoBanner from './components/DemoBanner'; // Add this import
 import './app.css';
 import ForgotPassword from './forgotpassword/ForgotPassword';
 import AdminOrders from './pages/AdminOrders';
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div className="app">
+      <DemoBanner />
       {/* Show header only on specific pages */}
       {showHeader && <Header />}
       
