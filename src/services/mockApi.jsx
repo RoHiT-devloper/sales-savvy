@@ -1,181 +1,174 @@
-// src/services/mockApi.js
-import {
-  fakeProducts,
-  fakeUsers,
-  fakeOrders,
-  fakeAnalytics,
-  fakeCartItems,
-  fakeWishlistItems,
-  fakeAddresses,
-  fakeReviews
-} from '../data/fakeData';
+// src/utils/mockApi.js
+import { fakeProducts, fakeUsers, fakeOrders, fakeCartItems, fakeWishlistItems } from '../data/fakeData';
 
-// Simulate API delay
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-export const mockApi = {
-  // Auth endpoints
-  signIn: async (credentials) => {
-    await delay(1000);
-    
-    if (credentials.username === "admin" && credentials.password === "admin") {
-      return {
-        success: true,
-        message: "Login successful!",
-        user: {
-          username: "admin",
-          role: "admin",
-          email: "admin@salesavvy.com"
+// Simple mock fetch function
+const mockFetch = (url, options = {}) => {
+  console.log('Mock API Call:', url, options);
+  
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // Auth endpoints
+      if (url.includes('/api/auth/signin') && options.method === 'POST') {
+        const data = JSON.parse(options.body);
+        
+        if (data.username === 'admin' && data.password === 'admin') {
+          resolve({
+            ok: true,
+            json: () => Promise.resolve({
+              success: true,
+              message: "Login successful!",
+              user: { username: "admin", role: "admin", email: "admin@salesavvy.com" }
+            })
+          });
+          return;
         }
-      };
-    }
-    
-    if (credentials.username === "customer" && credentials.password === "customer") {
-      return {
-        success: true,
-        message: "Login successful!",
-        user: {
-          username: "customer",
-          role: "customer",
-          email: "customer@example.com"
-        },
-        products: fakeProducts
-      };
-    }
-    
-    throw new Error("Invalid username or password");
-  },
+        
+        if (data.username === 'customer' && data.password === 'customer') {
+          resolve({
+            ok: true,
+            json: () => Promise.resolve({
+              success: true,
+              message: "Login successful!",
+              user: { username: "customer", role: "customer", email: "customer@example.com" },
+              products: fakeProducts
+            })
+          });
+          return;
+        }
+        
+        resolve({
+          ok: false,
+          json: () => Promise.resolve({
+            success: false,
+            message: "Invalid username or password"
+          })
+        });
+        return;
+      }
 
-  signUp: async (userData) => {
-    await delay(1500);
-    return {
-      success: true,
-      message: "User registered successfully!"
-    };
-  },
+      // Get all products
+      if (url.includes('/getAllProducts')) {
+        resolve({
+          ok: true,
+          json: () => Promise.resolve(fakeProducts)
+        });
+        return;
+      }
 
-  // Product endpoints
-  getAllProducts: async () => {
-    await delay(800);
-    return fakeProducts;
-  },
+      // Get all users
+      if (url.includes('/api/auth/users')) {
+        resolve({
+          ok: true,
+          json: () => Promise.resolve(fakeUsers)
+        });
+        return;
+      }
 
-  addProduct: async (productData) => {
-    await delay(1000);
-    const newProduct = {
-      ...productData,
-      id: fakeProducts.length + 1,
-      reviews: productData.reviews || []
-    };
-    fakeProducts.push(newProduct);
-    return "Product added successfully!";
-  },
+      // Get all orders
+      if (url.includes('/api/orders')) {
+        resolve({
+          ok: true,
+          json: () => Promise.resolve(fakeOrders)
+        });
+        return;
+      }
 
-  updateProduct: async (productData) => {
-    await delay(1000);
-    const index = fakeProducts.findIndex(p => p.id === productData.id);
-    if (index !== -1) {
-      fakeProducts[index] = { ...fakeProducts[index], ...productData };
-      return "Product updated successfully!";
-    }
-    throw new Error("Product not found");
-  },
+      // Get cart
+      if (url.includes('/api/cart/getCart')) {
+        resolve({
+          ok: true,
+          json: () => Promise.resolve({
+            username: 'customer',
+            items: fakeCartItems,
+            total: fakeCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+          })
+        });
+        return;
+      }
 
-  deleteProduct: async (productId) => {
-    await delay(1000);
-    const index = fakeProducts.findIndex(p => p.id === parseInt(productId));
-    if (index !== -1) {
-      fakeProducts.splice(index, 1);
-      return "Product deleted successfully!";
-    }
-    throw new Error("Product not found");
-  },
+      // Get wishlist
+      if (url.includes('/api/wishlist/')) {
+        resolve({
+          ok: true,
+          json: () => Promise.resolve(fakeWishlistItems)
+        });
+        return;
+      }
 
-  searchProduct: async (id) => {
-    await delay(500);
-    const product = fakeProducts.find(p => p.id === parseInt(id));
-    if (!product) throw new Error("Product not found");
-    return product;
-  },
+      // Add to cart
+      if (url.includes('/addToCart') && options.method === 'POST') {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("Product added to cart successfully!")
+        });
+        return;
+      }
 
-  // User management
-  getAllUsers: async () => {
-    await delay(800);
-    return fakeUsers;
-  },
+      // Add product
+      if (url.includes('/addProduct') && options.method === 'POST') {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("Product added successfully!")
+        });
+        return;
+      }
 
-  deleteUser: async (userId) => {
-    await delay(1000);
-    const index = fakeUsers.findIndex(u => u.id === parseInt(userId));
-    if (index !== -1) {
-      fakeUsers.splice(index, 1);
-      return "User deleted successfully!";
-    }
-    throw new Error("User not found");
-  },
+      // Delete product
+      if (url.includes('/deleteProduct')) {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("Product deleted successfully!")
+        });
+        return;
+      }
 
-  // Orders
-  getAllOrders: async () => {
-    await delay(800);
-    return fakeOrders;
-  },
+      // Update product
+      if (url.includes('/updateProduct') && options.method === 'POST') {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("Product updated successfully!")
+        });
+        return;
+      }
 
-  updateOrderStatus: async (orderId, status) => {
-    await delay(500);
-    const order = fakeOrders.find(o => o.id === parseInt(orderId));
-    if (order) {
-      order.status = status;
-      return "Order status updated successfully!";
-    }
-    throw new Error("Order not found");
-  },
+      // Update order status
+      if (url.includes('/api/orders/') && url.includes('/status') && options.method === 'PUT') {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("Order status updated successfully!")
+        });
+        return;
+      }
 
-  // Analytics
-  getAnalytics: async () => {
-    await delay(1000);
-    return fakeAnalytics;
-  },
+      // Delete user
+      if (url.includes('/api/auth/users/') && options.method === 'DELETE') {
+        resolve({
+          ok: true,
+          text: () => Promise.resolve("User deleted successfully!")
+        });
+        return;
+      }
 
-  // Cart
-  getCart: async (username) => {
-    await delay(500);
-    return {
-      username: username,
-      items: fakeCartItems,
-      total: fakeCartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    };
-  },
+      // Default - not found
+      resolve({
+        ok: false,
+        text: () => Promise.resolve("Endpoint not found in mock API")
+      });
+    }, 500); // Simulate network delay
+  });
+};
 
-  addToCart: async (cartData) => {
-    await delay(500);
-    return "Product added to cart successfully!";
-  },
-
-  // Wishlist
-  getWishlist: async (username) => {
-    await delay(500);
-    return fakeWishlistItems;
-  },
-
-  // Addresses
-  getAddresses: async (username) => {
-    await delay(500);
-    return fakeAddresses;
-  },
-
-  // Reviews
-  getProductReviews: async (productId) => {
-    await delay(500);
-    return fakeReviews.filter(review => review.productId === parseInt(productId));
-  },
-
-  getRatingSummary: async (productId) => {
-    await delay(300);
-    const reviews = fakeReviews.filter(review => review.productId === parseInt(productId));
-    const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
-    return {
-      averageRating: averageRating || 0,
-      reviewCount: reviews.length
-    };
+// Override the global fetch function
+const originalFetch = window.fetch;
+window.fetch = function(url, options) {
+  // Use mock API for all localhost calls
+  if (url.includes('localhost:8080') || url.includes('/api/') || url.startsWith('/')) {
+    return mockFetch(url, options);
   }
+  // Use original fetch for other URLs
+  return originalFetch.apply(this, arguments);
+};
+
+export const initializeMockAPI = () => {
+  console.log('Mock API initialized - Using fake data for demonstration');
 };
