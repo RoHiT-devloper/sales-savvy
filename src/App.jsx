@@ -10,7 +10,7 @@ import View_User from './user/View_User';
 import Show_All_Product from './productmanager/Show_All_Product';
 import Search_Product from './productmanager/Search_Product';
 import Product_Manager from './admin/Product_Manager';
-import Admin_home from "./admin_page/AdminPage";
+import Admin_home from "./admin/Admin_Home";
 import Delete_User from './user/Delete_User';
 import Header from './header/Header';
 import User_Management from './user/User_Management';
