@@ -1,4 +1,3 @@
-// src/App.jsx
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Sign_in from "./pages/Sign_in";
@@ -25,39 +24,46 @@ import Wishlist from './components/Wishlist';
 import AddressManager from './components/AddressManager';
 import AdminAnalytics from './admin/AdminAnalytics';
 import IndexPage from './pages/IndexPage';
-import DemoBanner from './components/DemoBanner'; // ADD THIS IMPORT
+
+// Simple Demo Banner Component
+const DemoBanner = () => (
+  <div style={{
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    color: 'white',
+    padding: '10px 20px',
+    textAlign: 'center',
+    fontSize: '14px',
+    fontWeight: 'bold'
+  }}>
+    🚀 DEMO MODE - Use admin/admin or customer/customer
+  </div>
+);
 
 function App() {
   const location = useLocation();
   
-  // Define paths where header should NOT be shown
   const noHeaderPaths = ['/', '/signin', '/signup', '/welcome'];
   const showHeader = !noHeaderPaths.includes(location.pathname);
 
   return (
     <div className="app">
-      {/* Demo Banner - Show on all pages */}
       <DemoBanner />
       
-      {/* Show header only on specific pages */}
       {showHeader && <Header />}
       
       <div className="app-content">
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<IndexPage />} />
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/signin" element={<Sign_in />} />
           <Route path="/signup" element={<Sign_up />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
-          {/* Customer Routes */}
           <Route path="/customer" element={<Customer_home />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/addresses" element={<AddressManager />} />
                     
-          {/* Admin Routes */}
           <Route path="/admin" element={<Admin_home />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
@@ -72,7 +78,6 @@ function App() {
           <Route path="/delete-users" element={<Delete_User />} />
           <Route path="/product/:id/reviews" element={<ProductReviews />} />
           
-          {/* Catch all route */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>

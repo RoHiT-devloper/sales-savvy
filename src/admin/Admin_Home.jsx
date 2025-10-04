@@ -1,72 +1,76 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./Admin_Home.css";
 
 const Admin_Home = () => {
     return (
-        <div className="admin-home-container admin-page">
-            <div className="admin-home-header">
-                <h1 className="admin-home-title">Admin Dashboard</h1>
-                <p className="admin-home-subtitle">Manage your application efficiently</p>
+        <div style={{ padding: '20px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <h1>Admin Dashboard</h1>
+                <p>Manage your application efficiently</p>
             </div>
             
-            <div className="admin-home-content">
-                <div className="admin-cards-grid">
-                    <Link to="/userManagement" className="admin-card user-management-card">
-                        <div className="admin-card-icon">
-                            <i className="fas fa-users"></i>
-                        </div>
-                        <h2 className="admin-card-title">User Management</h2>
-                        <p className="admin-card-description">
-                            Manage user accounts, permissions, and access levels
-                        </p>
-                        <div className="admin-card-cta">
-                            <span>Go to Users</span>
-                            <i className="fas fa-arrow-right"></i>
-                        </div>
-                    </Link>
-                    
-                    <Link to="/productmanager" className="admin-card product-management-card">
-                        <div className="admin-card-icon">
-                            <i className="fas fa-box"></i>
-                        </div>
-                        <h2 className="admin-card-title">Product Management</h2>
-                        <p className="admin-card-description">
-                            Manage product catalog, inventory, and pricing
-                        </p>
-                        <div className="admin-card-cta">
-                            <span>Go to Products</span>
-                            <i className="fas fa-arrow-right"></i>
-                        </div>
-                    </Link>
-                    
-                    <Link to="/admin/orders" className="admin-card order-management-card">
-                        <div className="admin-card-icon">
-                            <i className="fas fa-shopping-cart"></i>
-                        </div>
-                        <h2 className="admin-card-title">Order Management</h2>
-                        <p className="admin-card-description">
-                            View and manage customer orders, update status, and print receipts
-                        </p>
-                        <div className="admin-card-cta">
-                            <span>Manage Orders</span>
-                            <i className="fas fa-arrow-right"></i>
-                        </div>
-                    </Link>
-                    <Link to="/admin/analytics" className="admin-card analytics-card">
-                        <div className="admin-card-icon">
-                            <i className="fas fa-chart-line"></i>
-                        </div>
-                        <h2 className="admin-card-title">Analytics Dashboard</h2>
-                        <p className="admin-card-description">
-                            View sales reports, user statistics, and business insights
-                        </p>
-                        <div className="admin-card-cta">
-                            <span>View Analytics</span>
-                            <i className="fas fa-arrow-right"></i>
-                        </div>
-                    </Link>
-                </div>
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: '20px',
+                maxWidth: '1200px',
+                margin: '0 auto'
+            }}>
+                <Link to="/userManagement" style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    background: 'white',
+                    padding: '20px',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                    textAlign: 'center'
+                }}>
+                    <div style={{ fontSize: '2em', marginBottom: '10px' }}>👥</div>
+                    <h2>User Management</h2>
+                    <p>Manage user accounts and permissions</p>
+                </Link>
+                
+                <Link to="/productManager" style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    background: 'white',
+                    padding: '20px',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                    textAlign: 'center'
+                }}>
+                    <div style={{ fontSize: '2em', marginBottom: '10px' }}>📦</div>
+                    <h2>Product Management</h2>
+                    <p>Manage product catalog and inventory</p>
+                </Link>
+                
+                <Link to="/admin/orders" style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    background: 'white',
+                    padding: '20px',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                    textAlign: 'center'
+                }}>
+                    <div style={{ fontSize: '2em', marginBottom: '10px' }}>🛒</div>
+                    <h2>Order Management</h2>
+                    <p>View and manage customer orders</p>
+                </Link>
+                
+                <Link to="/admin/analytics" style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    background: 'white',
+                    padding: '20px',
+                    borderRadius: '8px',
+                    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                    textAlign: 'center'
+                }}>
+                    <div style={{ fontSize: '2em', marginBottom: '10px' }}>📊</div>
+                    <h2>Analytics Dashboard</h2>
+                    <p>View sales reports and business insights</p>
+                </Link>
             </div>
         </div>
     );
