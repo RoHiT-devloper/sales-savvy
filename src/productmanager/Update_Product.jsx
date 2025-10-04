@@ -331,7 +331,7 @@ const Update_Product = () => {
                                         <div className="product-info">
                                             <span className="product-id">#{product.id}</span>
                                             <h4 className="product-name">{product.name}</h4>
-                                            <div className="product-price">${product.price}</div>
+                                            <div className="product-price">Rs.{product.price}</div>
                                             <span className="product-category">{product.category}</span>
                                             <div className="product-action">
                                                 <span className="action-text">Click to edit</span>
