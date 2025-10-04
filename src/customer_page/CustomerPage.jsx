@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './CustomerPage.css'; // Separate CSS file
 
 const CustomerPage = () => {
   const [products, setProducts] = useState([]);
@@ -9,82 +10,123 @@ const CustomerPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [quantities, setQuantities] = useState({});
+  const [notification, setNotification] = useState(null);
+
+  // Sample products data
+  const sampleProducts = [
+    {
+      id: 1,
+      name: "Wireless Bluetooth Headphones",
+      price: 2999,
+      description: "High-quality wireless headphones with noise cancellation and 30-hour battery life. Perfect for music lovers and professionals.",
+      photo: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+      category: "Electronics",
+      rating: 4.5,
+      reviews: 125,
+      features: ["Noise Cancellation", "30hr Battery", "Quick Charge"]
+    },
+    {
+      id: 2,
+      name: "Smart Fitness Watch",
+      price: 5999,
+      description: "Advanced fitness tracker with heart rate monitoring, GPS, and smartphone notifications. Track your health in style.",
+      photo: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+      category: "Electronics",
+      rating: 4.3,
+      reviews: 89,
+      features: ["Heart Rate Monitor", "GPS Tracking", "Water Resistant"]
+    },
+    {
+      id: 3,
+      name: "Organic Cotton T-Shirt",
+      price: 899,
+      description: "100% organic cotton t-shirt, comfortable and eco-friendly. Available in multiple colors and sizes.",
+      photo: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
+      category: "Clothing",
+      rating: 4.7,
+      reviews: 234,
+      features: ["100% Organic", "Eco-Friendly", "Multiple Colors"]
+    },
+    {
+      id: 4,
+      name: "Stainless Steel Water Bottle",
+      price: 1299,
+      description: "Insulated stainless steel water bottle that keeps drinks cold for 24 hours or hot for 12 hours.",
+      photo: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
+      category: "Lifestyle",
+      rating: 4.8,
+      reviews: 167,
+      features: ["24hr Cold", "12hr Hot", "Leak Proof"]
+    },
+    {
+      id: 5,
+      name: "Professional Camera Backpack",
+      price: 4599,
+      description: "Water-resistant camera backpack with customizable compartments for all your photography gear.",
+      photo: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
+      category: "Photography",
+      rating: 4.6,
+      reviews: 78,
+      features: ["Water Resistant", "Customizable", "Padded Protection"]
+    },
+    {
+      id: 6,
+      name: "Wireless Phone Charger",
+      price: 1599,
+      description: "Fast wireless charging pad compatible with all Qi-enabled devices with safety features.",
+      photo: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400",
+      category: "Electronics",
+      rating: 4.4,
+      reviews: 203,
+      features: ["Fast Charging", "Universal Compatibility", "Safety Certified"]
+    },
+    {
+      id: 7,
+      name: "Yoga Mat Premium",
+      price: 2499,
+      description: "Non-slip yoga mat with excellent cushioning and alignment guides for perfect poses.",
+      photo: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400",
+      category: "Fitness",
+      rating: 4.9,
+      reviews: 156,
+      features: ["Non-Slip", "Eco-Friendly", "Alignment Guides"]
+    },
+    {
+      id: 8,
+      name: "Ceramic Coffee Mug Set",
+      price: 1799,
+      description: "Set of 4 beautiful ceramic mugs, dishwasher and microwave safe with elegant design.",
+      photo: "https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=400",
+      category: "Home & Kitchen",
+      rating: 4.5,
+      reviews: 89,
+      features: ["Set of 4", "Dishwasher Safe", "Elegant Design"]
+    }
+  ];
 
   useEffect(() => {
-    const sampleProducts = [
-      {
-        id: 1,
-        name: "Wireless Bluetooth Headphones",
-        price: 2999,
-        description: "High-quality wireless headphones with noise cancellation and 30-hour battery life",
-        photo: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
-        category: "Electronics",
-        rating: 4.5,
-        reviews: 125
-      },
-      {
-        id: 2,
-        name: "Smart Fitness Watch",
-        price: 5999,
-        description: "Advanced fitness tracker with heart rate monitoring, GPS, and smartphone notifications",
-        photo: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
-        category: "Electronics",
-        rating: 4.3,
-        reviews: 89
-      },
-      {
-        id: 3,
-        name: "Organic Cotton T-Shirt",
-        price: 899,
-        description: "100% organic cotton t-shirt, comfortable and eco-friendly. Available in multiple colors",
-        photo: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400",
-        category: "Clothing",
-        rating: 4.7,
-        reviews: 234
-      },
-      {
-        id: 4,
-        name: "Stainless Steel Water Bottle",
-        price: 1299,
-        description: "Insulated stainless steel water bottle that keeps drinks cold for 24 hours or hot for 12 hours",
-        photo: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
-        category: "Lifestyle",
-        rating: 4.8,
-        reviews: 167
-      },
-      {
-        id: 5,
-        name: "Professional Camera Backpack",
-        price: 4599,
-        description: "Water-resistant camera backpack with customizable compartments for all your photography gear",
-        photo: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400",
-        category: "Photography",
-        rating: 4.6,
-        reviews: 78
-      },
-      {
-        id: 6,
-        name: "Wireless Phone Charger",
-        price: 1599,
-        description: "Fast wireless charging pad compatible with all Qi-enabled devices with safety features",
-        photo: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=400",
-        category: "Electronics",
-        rating: 4.4,
-        reviews: 203
-      }
-    ];
-    
-    setProducts(sampleProducts);
-    
-    // Initialize quantities
-    const initialQuantities = {};
-    sampleProducts.forEach(product => {
-      initialQuantities[product.id] = 1;
-    });
-    setQuantities(initialQuantities);
-    
-    setLoading(false);
+    // Simulate API call delay
+    const timer = setTimeout(() => {
+      setProducts(sampleProducts);
+      
+      // Initialize quantities
+      const initialQuantities = {};
+      sampleProducts.forEach(product => {
+        initialQuantities[product.id] = 1;
+      });
+      setQuantities(initialQuantities);
+      
+      setLoading(false);
+    }, 800);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // Show notification
+  const showNotification = (message, type = 'success') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 3000);
+  };
 
   const handleQuantityChange = (productId, change) => {
     setQuantities(prev => ({
@@ -95,19 +137,33 @@ const CustomerPage = () => {
 
   const handleAddToCart = (product) => {
     const quantity = quantities[product.id] || 1;
-    setCartItems(prev => [...prev, { ...product, quantity }]);
+    const existingItemIndex = cartItems.findIndex(item => item.id === product.id);
     
-    // Show success notification (you can implement this)
-    console.log(`Added ${quantity} ${product.name} to cart`);
+    if (existingItemIndex > -1) {
+      // Update quantity if already in cart
+      const updatedCart = [...cartItems];
+      updatedCart[existingItemIndex].quantity += quantity;
+      setCartItems(updatedCart);
+    } else {
+      // Add new item to cart
+      setCartItems(prev => [...prev, { ...product, quantity }]);
+    }
+    
+    showNotification(`Added ${quantity} ${product.name} to cart!`, 'success');
   };
 
   const handleAddToWishlist = (product) => {
     if (wishlistItems.find(item => item.id === product.id)) {
       setWishlistItems(prev => prev.filter(item => item.id !== product.id));
+      showNotification(`Removed ${product.name} from wishlist`, 'info');
     } else {
       setWishlistItems(prev => [...prev, product]);
+      showNotification(`Added ${product.name} to wishlist!`, 'success');
     }
   };
+
+  const isInCart = (productId) => cartItems.some(item => item.id === productId);
+  const isInWishlist = (productId) => wishlistItems.some(item => item.id === productId);
 
   const filteredProducts = products.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -118,12 +174,15 @@ const CustomerPage = () => {
 
   const categories = ['all', ...new Set(products.map(product => product.category))];
 
+  // Calculate cart total
+  const cartTotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
   if (loading) {
     return (
       <div className="customer-container">
         <div className="loading-spinner">
           <div className="spinner"></div>
-          <p>Loading products...</p>
+          <p>Loading amazing products...</p>
         </div>
       </div>
     );
@@ -131,13 +190,21 @@ const CustomerPage = () => {
 
   return (
     <div className="customer-container">
+      {/* Notification System */}
+      {notification && (
+        <div className={`notification notification-${notification.type}`}>
+          <span>{notification.message}</span>
+          <button onClick={() => setNotification(null)}>×</button>
+        </div>
+      )}
+
       {/* Welcome Header */}
       <div className="welcome-header">
         <div className="welcome-content">
           <h1>
             Welcome to <span className="username-highlight">SalesSavvy</span>
           </h1>
-          <p className="welcome-subtitle">Discover amazing products at great prices</p>
+          <p className="welcome-subtitle">Discover amazing products at unbeatable prices</p>
         </div>
         
         <div className="header-actions">
@@ -149,6 +216,10 @@ const CustomerPage = () => {
             <div className="stat-card">
               <span className="stat-number">{cartItems.length}</span>
               <span className="stat-label">In Cart</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-number">Rs.{cartTotal}</span>
+              <span className="stat-label">Cart Total</span>
             </div>
           </div>
           
@@ -183,10 +254,19 @@ const CustomerPage = () => {
           <input
             type="text"
             className="customer-search"
-            placeholder="Search products..."
+            placeholder="Search products by name or description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+          {searchTerm && (
+            <button 
+              className="clear-search-btn"
+              onClick={() => setSearchTerm('')}
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+          )}
         </div>
         
         <div className="filter-container">
@@ -212,6 +292,17 @@ const CustomerPage = () => {
           {searchTerm && ` for "${searchTerm}"`}
           {selectedCategory !== 'all' && ` in ${selectedCategory}`}
         </p>
+        {(searchTerm || selectedCategory !== 'all') && (
+          <button 
+            className="clear-filters-btn"
+            onClick={() => {
+              setSearchTerm('');
+              setSelectedCategory('all');
+            }}
+          >
+            Clear All Filters
+          </button>
+        )}
       </div>
 
       {/* Products Grid */}
@@ -221,26 +312,24 @@ const CustomerPage = () => {
             <div className="empty-state">
               <span className="empty-icon">🔍</span>
               <h3>No Products Found</h3>
-              <p>Try adjusting your search or filter criteria</p>
-              {(searchTerm || selectedCategory !== 'all') && (
-                <button 
-                  className="clear-filters-btn"
-                  onClick={() => {
-                    setSearchTerm('');
-                    setSelectedCategory('all');
-                  }}
-                >
-                  Clear Filters
-                </button>
-              )}
+              <p>We couldn't find any products matching your criteria.</p>
+              <button 
+                className="clear-filters-btn"
+                onClick={() => {
+                  setSearchTerm('');
+                  setSelectedCategory('all');
+                }}
+              >
+                Show All Products
+              </button>
             </div>
           </div>
         ) : (
           filteredProducts.map(product => {
             const quantity = quantities[product.id] || 1;
             const totalPrice = product.price * quantity;
-            const isInWishlist = wishlistItems.find(item => item.id === product.id);
-            const isInCart = cartItems.find(item => item.id === product.id);
+            const productInCart = isInCart(product.id);
+            const productInWishlist = isInWishlist(product.id);
 
             return (
               <div key={product.id} className="customer-card">
@@ -251,6 +340,7 @@ const CustomerPage = () => {
                       <img 
                         src={product.photo} 
                         alt={product.name}
+                        loading="lazy"
                         onError={(e) => {
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
@@ -267,6 +357,10 @@ const CustomerPage = () => {
                   <div className="product-badge">
                     {product.category}
                   </div>
+                  <div className="product-rating">
+                    <span className="rating-stars">{"⭐".repeat(Math.floor(product.rating))}</span>
+                    <span className="rating-text">({product.reviews})</span>
+                  </div>
                 </div>
 
                 {/* Product Details Section */}
@@ -275,9 +369,14 @@ const CustomerPage = () => {
                     <div className="product-info">
                       <h3 className="product-name">{product.name}</h3>
                       <p className="product-description">{product.description}</p>
+                      <div className="product-features">
+                        {product.features?.slice(0, 2).map((feature, index) => (
+                          <span key={index} className="feature-tag">✓ {feature}</span>
+                        ))}
+                      </div>
                     </div>
                     <div className="product-price">
-                      <span className="price">Rs.{product.price}</span>
+                      <span className="price">Rs.{product.price.toLocaleString()}</span>
                       <span className="price-unit">per item</span>
                     </div>
                   </div>
@@ -290,12 +389,14 @@ const CustomerPage = () => {
                         <button 
                           onClick={() => handleQuantityChange(product.id, -1)}
                           disabled={quantity <= 1}
+                          aria-label="Decrease quantity"
                         >
                           -
                         </button>
                         <span>{quantity}</span>
                         <button 
                           onClick={() => handleQuantityChange(product.id, 1)}
+                          aria-label="Increase quantity"
                         >
                           +
                         </button>
@@ -304,28 +405,37 @@ const CustomerPage = () => {
 
                     <div className="cart-status">
                       <div className="cart-indicator">
-                        {isInCart && (
+                        {productInCart && (
                           <span className="cart-badge">In Cart</span>
                         )}
                         <div className="total-price">
                           <span className="total-label">Total:</span>
-                          <span className="total-amount">Rs.{totalPrice}</span>
+                          <span className="total-amount">Rs.{totalPrice.toLocaleString()}</span>
                         </div>
                       </div>
                     </div>
 
                     <div className="action-buttons">
                       <button 
-                        className={`customer-add-to-cart ${isInCart ? 'in-cart' : ''}`}
+                        className={`customer-add-to-cart ${productInCart ? 'in-cart' : ''}`}
                         onClick={() => handleAddToCart(product)}
+                        disabled={productInCart}
                       >
-                        {isInCart ? '✓ Added to Cart' : `Add to Cart (${quantity})`}
+                        {productInCart ? (
+                          <>
+                            <span className="check-icon">✓</span>
+                            Added to Cart
+                          </>
+                        ) : (
+                          `Add to Cart (${quantity})`
+                        )}
                       </button>
                       <button 
-                        className={`wishlist-btn ${isInWishlist ? 'in-wishlist' : ''}`}
+                        className={`wishlist-btn ${productInWishlist ? 'in-wishlist' : ''}`}
                         onClick={() => handleAddToWishlist(product)}
+                        aria-label={productInWishlist ? "Remove from wishlist" : "Add to wishlist"}
                       >
-                        {isInWishlist ? '❤️' : '🤍'}
+                        {productInWishlist ? '❤️' : '🤍'}
                       </button>
                     </div>
                   </div>
@@ -336,47 +446,32 @@ const CustomerPage = () => {
         )}
       </div>
 
-      {/* Order History Section (Optional - can be removed if not needed) */}
-      <div className="order-history-section">
+      {/* Features Section */}
+      <div className="features-section">
         <div className="section-header">
-          <h2>Why Shop With Us?</h2>
-          <p>Experience the best in online shopping</p>
+          <h2>Why Shop With SalesSavvy?</h2>
+          <p>Experience the best in online shopping with our premium features</p>
         </div>
-        <div className="orders-list">
-          <div className="order-card">
-            <div className="order-header">
-              <div className="order-info">
-                <h3>Fast & Free Shipping</h3>
-                <p className="order-date">Delivery within 2-3 business days</p>
-              </div>
-              <div className="order-status">
-                <span className="status-badge delivered">Free</span>
-              </div>
-            </div>
+        <div className="features-grid">
+          <div className="feature-card">
+            <div className="feature-icon">🚚</div>
+            <h3>Free Shipping</h3>
+            <p>Free delivery on orders above Rs. 999</p>
           </div>
-          
-          <div className="order-card">
-            <div className="order-header">
-              <div className="order-info">
-                <h3>Secure Payments</h3>
-                <p className="order-date">100% secure payment processing</p>
-              </div>
-              <div className="order-status">
-                <span className="status-badge delivered">Protected</span>
-              </div>
-            </div>
+          <div className="feature-card">
+            <div className="feature-icon">🔒</div>
+            <h3>Secure Payment</h3>
+            <p>100% secure payment processing</p>
           </div>
-          
-          <div className="order-card">
-            <div className="order-header">
-              <div className="order-info">
-                <h3>24/7 Support</h3>
-                <p className="order-date">Round-the-clock customer service</p>
-              </div>
-              <div className="order-status">
-                <span className="status-badge delivered">Available</span>
-              </div>
-            </div>
+          <div className="feature-card">
+            <div className="feature-icon">↩️</div>
+            <h3>Easy Returns</h3>
+            <p>30-day return policy on all items</p>
+          </div>
+          <div className="feature-card">
+            <div className="feature-icon">💬</div>
+            <h3>24/7 Support</h3>
+            <p>Round-the-clock customer service</p>
           </div>
         </div>
       </div>
