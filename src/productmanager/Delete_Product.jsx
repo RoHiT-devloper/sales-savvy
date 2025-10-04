@@ -164,7 +164,7 @@ const Delete_Product = () => {
                                 <div className="product-info">
                                     <span className="product-id">ID: {product.id}</span>
                                     <span className="product-name">{product.name}</span>
-                                    <span className="product-price">${product.price}</span>
+                                    <span className="product-price">Rs.{product.price}</span>
                                     <span className="product-category">{product.category}</span>
                                 </div>
                             </div>
