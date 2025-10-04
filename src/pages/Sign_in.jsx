@@ -156,21 +156,24 @@ const SignIn = () => {
         <div className="auth-footer">
           <p>Don't have an account? <Link to="/signup" className="auth-link">Sign Up</Link></p>
         </div>
-      // Add this before the closing div of auth-card
-<div className="demo-credentials" style={{
-  marginTop: '20px',
-  padding: '15px',
-  background: '#f8f9fa',
-  borderRadius: '8px',
-  border: '1px solid #e9ecef',
-  textAlign: 'center'
-}}>
-  <h4 style={{ margin: '0 0 10px 0', color: '#495057' }}>Demo Credentials:</h4>
-  <div style={{ margin: '5px 0', fontSize: '14px', color: '#6c757d' }}>
-    <strong>Admin:</strong> username: <code>admin</code> / password: <code>admin</code>
-  </div>
-  <div style={{ margin: '5px 0', fontSize: '14px', color: '#6c757d' }}>
-    <strong>Customer:</strong> username: <code>customer</code> / password: <code>customer</code>
+<div className="demo-credentials">
+  <div style={{
+    marginTop: '20px',
+    padding: '15px',
+    background: '#f8f9fa',
+    borderRadius: '8px',
+    border: '1px solid #e9ecef',
+    textAlign: 'center'
+  }}>
+    <h4 style={{ margin: '0 0 10px 0', color: '#495057', fontSize: '14px' }}>
+      Demo Credentials:
+    </h4>
+    <div style={{ margin: '8px 0', fontSize: '13px', color: '#6c757d' }}>
+      <strong>Admin:</strong> username: <code>admin</code> | password: <code>admin</code>
+    </div>
+    <div style={{ margin: '8px 0', fontSize: '13px', color: '#6c757d' }}>
+      <strong>Customer:</strong> username: <code>customer</code> | password: <code>customer</code>
+    </div>
   </div>
 </div>
       </div>

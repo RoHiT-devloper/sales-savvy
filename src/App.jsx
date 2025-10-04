@@ -12,12 +12,11 @@ import View_User from './user/View_User';
 import Show_All_Product from './productmanager/Show_All_Product';
 import Search_Product from './productmanager/Search_Product';
 import Product_Manager from './admin/Product_Manager';
-import Admin_home from './admin/Admin_Home'; // This is the correct import
+import Admin_home from './admin/Admin_Home';
 import Delete_User from './user/Delete_User';
 import Header from './header/Header';
 import User_Management from './user/User_Management';
 import CartPage from './cart/CartPage';
-import DemoBanner from './components/DemoBanner'; // Add this import
 import './app.css';
 import ForgotPassword from './forgotpassword/ForgotPassword';
 import AdminOrders from './pages/AdminOrders';
@@ -26,6 +25,7 @@ import Wishlist from './components/Wishlist';
 import AddressManager from './components/AddressManager';
 import AdminAnalytics from './admin/AdminAnalytics';
 import IndexPage from './pages/IndexPage';
+import DemoBanner from './components/DemoBanner'; // ADD THIS IMPORT
 
 function App() {
   const location = useLocation();
@@ -36,7 +36,9 @@ function App() {
 
   return (
     <div className="app">
+      {/* Demo Banner - Show on all pages */}
       <DemoBanner />
+      
       {/* Show header only on specific pages */}
       {showHeader && <Header />}
       
